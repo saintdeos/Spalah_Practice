@@ -26,16 +26,17 @@ def universities(cid, vk_domen, cts_path, unv_path)
   universities = Net::HTTP.get(vk_domen, unv_path + "&city_id=#{cid}")
   universities = JSON.parse(universities)['response']
   universities.shift
-  $stdout = File.open('universities.txt', 'a+')
-  universities.each{ |u| puts "#{u['title']}"}
+  File.open('universities.txt', 'a+') do |file| 
+    universities.each{ |u| file.puts "#{u['title']}" }
+  end
 end
 
 VK_CONF = YAML.load(File.read('./config.yml'))['vk']
 
 vk_domen = VK_CONF['domen']
 cnt_path = VK_CONF['methods']['countries'] + '?need_all=1&count=2'
-cts_path = VK_CONF['methods']['cities'] + '?need_all=0&count=3'
-unv_path = VK_CONF['methods']['universities'] + '?count=3'
+cts_path = VK_CONF['methods']['cities'] + '?need_all=0&count=2'
+unv_path = VK_CONF['methods']['universities'] + '?count=2'
 
 Dir.mkdir("data")
 Dir.chdir("data")
