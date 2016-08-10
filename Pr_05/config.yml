@@ -4,3 +4,4 @@ vk:
     countries: /method/database.getCountries
     cities: /method/database.getCities
     universities: /method/database.getUniversities
+  base_dir: /home/deos/Spalah_Practice/Pr_05/data
